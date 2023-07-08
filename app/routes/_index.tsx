@@ -1,7 +1,9 @@
 import type { V2_MetaFunction } from "@remix-run/node";
 import SearchBar from "~/components/SearchBar";
 import ImageList from "~/components/ImageList";
-import axios from "axios";
+import { searchImages } from "~/utils/search";
+import { useState } from "react";
+import type { Image } from "~/types";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -13,24 +15,16 @@ export const meta: V2_MetaFunction = () => {
   ];
 };
 
-const searchImages = async () => {
-  const results = await axios.get("https://api.unsplash.com/search/photos", {
-    headers: {
-      Authorization: "Client-ID JoDf_SrKGzyaMG6ljqTIgubhFppAYzErp-t5pqEZQ6w",
-    },
-    params: {
-      query: "car",
-    },
-  });
-  console.log(results);
-};
-
 export default function Index() {
+  const [images, setImages] = useState<undefined | Image[]>();
+  const handleSubmit = async (term: string) => {
+    const result = await searchImages(term);
+    setImages(result);
+  };
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <SearchBar />
-      <ImageList />
-      <button onClick={searchImages}>Search</button>
+      <SearchBar onSubmit={handleSubmit} />
+      <ImageList images={images} />
     </div>
   );
 }
