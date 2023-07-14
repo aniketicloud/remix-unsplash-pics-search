@@ -6,7 +6,11 @@ interface ImageShowProps {
 }
 
 const ImageShow: React.FC<ImageShowProps> = ({ image }) => {
-  return <p>{image.id}</p>;
+  return (
+    <div>
+      <img src={image.urls.small} alt={image.alt_description} />
+    </div>
+  );
 };
 
 export default ImageShow;

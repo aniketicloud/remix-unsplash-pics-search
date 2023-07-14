@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SearchBar.css";
 
 interface SearchProps {
   onSubmit(term: string): void;
@@ -17,9 +18,16 @@ const SearchBar: React.FC<SearchProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div>
+    <div className="search-bar">
       <form onSubmit={handleFormSubmit}>
-        <input value={term} onChange={handleChange} />
+        <label htmlFor="search">Search Image</label>
+        <input
+          value={term}
+          onChange={handleChange}
+          type="search"
+          name="search"
+          id="search"
+        />
       </form>
     </div>
   );

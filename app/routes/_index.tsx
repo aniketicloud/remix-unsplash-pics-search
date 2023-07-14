@@ -22,7 +22,7 @@ export default function Index() {
     setImages(result);
   };
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8", margin: "1rem"}}>
       <SearchBar onSubmit={handleSubmit} />
       <ImageList images={images} />
     </div>
